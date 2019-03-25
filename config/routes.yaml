@@ -1,0 +1,3 @@
+hello:
+    resource: 'routes/hello.yaml'
+    prefix: '/hello'

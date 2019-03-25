@@ -1,0 +1,8 @@
+#config/routes/hello.yaml
+index:
+    path: /
+    controller: App\Controller\HelloController::sayHello
+
+sayHelloTo:
+    path: /{name}
+    controller: App\Controller\HelloController::sayHelloTo

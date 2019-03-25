@@ -1,0 +1,10 @@
+random:
+    path: /rand/{nb}/{min}-{max}
+    controller: App\Controller\RandomController::getResult
+    requirements:
+        nb: '[0-9]+'
+        min: '[0-9]+'
+        max: '[0-9]+'
+    defaults:
+        min: 0
+        max: 100
