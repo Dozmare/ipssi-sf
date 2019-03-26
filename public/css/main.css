@@ -1,0 +1,27 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: grey;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid black;
+}
+.red{
+    color:red;
+}
+
+.green{
+    color:green;
+}
+
+
+header span {
+    float: right;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 50px;
+    margin-right: 5px;
+}

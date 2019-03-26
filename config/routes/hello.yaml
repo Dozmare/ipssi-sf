@@ -1,5 +1,5 @@
 #config/routes/hello.yaml
-index:
+sayHelloIpsi:
     path: /
     controller: App\Controller\HelloController::sayHello
 

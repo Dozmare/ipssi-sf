@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class HelloController
+class HelloController extends AbstractController
 {
     public function sayHello(): Response
     {
@@ -15,7 +16,9 @@ class HelloController
 
     public function sayHelloTo(string $name2): Response
     {
-        return new Response('bonjour ' . $name2);
+        return $this->render('Hello/say-hello.html.twig', [
+            'name' => $name2
+        ]);
     }
 }
 

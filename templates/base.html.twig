@@ -3,9 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+        {% endblock %}
     </head>
     <body>
+
+        <header>
+            <a href="{{ path('sayHelloIpsi') }}">
+                <img height="50" src="{{ asset('img/logo.png') }}">
+            </a>
+            <span>{{ 'now'|date('H:i:s') }}</span>
+        </header>
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

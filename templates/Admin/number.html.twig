@@ -1,0 +1,33 @@
+{% import _self as macro %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <table border="solid">
+        <thead>
+            <tr>
+                <td>Number</td>
+                <td>Pair</td>
+                <td>Multiple de 8</td>
+                <td>Premier</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for num,isPrime in nbs %}
+            <tr>
+                <td>{{ num }}</td>
+                {{ macro.displayResult(num is even) }}
+                {{ macro.displayResult(num % 8 == 0) }}
+                {{ macro.displayResult(isPrime) }}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% macro displayResult(isOk) %}
+    {% if isOk %}
+        <td class="green">Oui</td>
+    {% else %}
+        <td class="red">Non</td>
+    {% endif %}
+{% endmacro %}
