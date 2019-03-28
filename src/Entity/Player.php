@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
+ * 
+ * @UniqueEntity(fields={"name"}, message="Le nom d'utilisateur existe déja, veuillez en choisir un autre")
  */
 class Player
 {
@@ -17,7 +22,10 @@ class Player
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
+     *
+     * @Assert\Length(min="2", max="50")
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -41,22 +49,17 @@ class Player
      */
     private $creationDate;
 
-    public function __construct(string $name, int $amount,int $victories, int $fails)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->amount = $amount;
-        $this->victories = $victories;
-        $this->fails = $fails;
-        $this->creationDate = new \DateTime('now');
+        $this->creationDate = new \DateTime();
     }
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -70,7 +73,7 @@ class Player
         return $this;
     }
 
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -84,7 +87,7 @@ class Player
         return $this;
     }
 
-    public function getVictories(): int
+    public function getVictories(): ?int
     {
         return $this->victories;
     }
@@ -98,7 +101,7 @@ class Player
         return $this;
     }
 
-    public function getFails(): int
+    public function getFails(): ?int
     {
         return $this->fails;
     }
@@ -112,7 +115,7 @@ class Player
         return $this;
     }
 
-    public function getCreationDate(): \DateTime
+    public function getCreationDate(): ?\DateTime
     {
         return $this->creationDate;
     }

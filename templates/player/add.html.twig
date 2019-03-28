@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1>Création d'un nouveau Joueur</h1>
+            {{ form_start(PlayerInscriptionForm) }}
+            {{ form_errors(PlayerInscriptionForm) }}
+
+            {# Je suis un commentaire avec plein d'espace #}
+            {{ form_row(PlayerInscriptionForm.name, {
+                'label': 'Nom :',
+                'attr': {
+                    'class': 'toto'
+                }
+            }) }}
+            <hr/>
+            {{ form_errors(PlayerInscriptionForm.amount) }}
+            {{ form_label(PlayerInscriptionForm.amount) }}
+            {{ form_widget(PlayerInscriptionForm.amount) }}
+            <hr/>
+
+            {{ form_rest(PlayerInscriptionForm) }}
+            <button type="submit">Envoyer</button>
+
+            {{ form_end (PlayerInscriptionForm) }}
+        </div>
+    </div>
+{% endblock %}
+

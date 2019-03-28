@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Player;
+
+use App\Form\PlayerInscriptionType;
+
 use App\Repository\PlayerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -16,20 +20,28 @@ use Symfony\Component\HttpFoundation\Response;
 class PlayerController extends AbstractController
 {
     /**
-     * @Route(path="/add-{username}")
+     * @Route(path="/add")
      */
-    public function add(string $username): Response
+    public function add(Request $request): Response
     {
-        $player = new Player($username,
-            rand(0,1000),
-            rand(0,10),
-            rand(0,10));
-        $doctrine = $this->getDoctrine();
-        $doctrine->getManager()->persist($player);
-        $doctrine->getManager()->flush();
+        $form = $this->createForm(PlayerInscriptionType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $player = $form->getData();
 
-        $id = $player->getId();
-        return new Response('L\'id est : '. $id);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($player);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_player_view', [
+                'id' => $player->getId(),
+            ]);
+        }
+
+
+        return $this->render('player/add.html.twig', [
+            'PlayerInscriptionForm' => $form->createView()
+        ]);
     }
 
     /**
@@ -51,6 +63,31 @@ class PlayerController extends AbstractController
             'players' => $players,
             'listTop5Amount' => $listGain,
             'listRatio' => $listRatio
+        ]);
+    }
+
+    /**
+     * @Route(path="/view/{id}")
+     */
+    public function viewShort(Player $player): Response
+    {
+        return $this->render('player/view.html.twig', [
+            'player' => $player
+        ]);
+    }
+    /**
+     * @Route(path="/view/{id}")
+     */
+    public function view(int $id): Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Player::class);
+        $player = $repository->find($id);
+
+        if($player === null) {
+            throw $this->createNotFoundException();
+        }
+        return $this->render('player/view.html.twig', [
+            'player' => $player
         ]);
     }
 }
