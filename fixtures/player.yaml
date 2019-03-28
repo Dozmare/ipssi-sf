@@ -1,0 +1,18 @@
+App\Entity\Player:
+    best-player:
+        __construct: false
+        name: 'John'
+        amount: 100000
+        victories: 16152
+        fails: 0
+        creationDate: "<dateTimeBetween('1 year ago', 'now')>"
+
+    player-{1..100}:
+#        __construct: ['<name()>', '<numberBetween(50,5000)>', '<numberBetween(1,100)>', '<numberBetween(1,100)>']
+
+        __construct: false
+        name: '<name()>'
+        amount: '<numberBetween(50,5000)>'
+        victories: '<numberBetween(1,100)>'
+        fails: '<numberBetween(1,100)>'
+        creationDate: "<dateTimeBetween('1 year ago', 'now')>"

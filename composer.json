@@ -13,6 +13,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/maker-bundle": "^1.11",
+        "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
@@ -62,6 +63,8 @@
         }
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.4",
+        "nelmio/alice": "^3.5",
         "symfony/web-server-bundle": "4.2.*"
     }
 }

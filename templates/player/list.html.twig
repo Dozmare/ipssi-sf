@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Top 5 Amount</h2>
+    <ul>
+        {% for player in listTop5Amount %}
+            <li>{{ player.name }} : {{ player.amount }} €</li>
+        {% endfor %}
+    </ul>
+    <h2>List ratio</h2>
+    <ul>
+        {% for player in listRatio %}
+            <li>{{ player.name }} : {{ player.ratio }}</li>
+        {% endfor %}
+    </ul>
+    <h2>List Players</h2>
+    <ul>
+        {% for player in players %}
+            <li>{{ player.name }} : {{ player.amount }} €</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

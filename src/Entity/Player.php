@@ -1,33 +1,57 @@
 <?php
 
-declare(strict_types=1);
-
-
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
+ */
 class Player
 {
     /**
-     * @var int
-     *
-     *
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
-    /** @var string */
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $name;
 
-    /** @var int */
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $amount;
 
-    public function __construct(string $name, int $amount)
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $victories;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $fails;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creationDate;
+
+    public function __construct(string $name, int $amount,int $victories, int $fails)
     {
         $this->name = $name;
         $this->amount = $amount;
+        $this->victories = $victories;
+        $this->fails = $fails;
+        $this->creationDate = new \DateTime('now');
     }
 
-    public function getId(): int
+
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -37,8 +61,70 @@ class Player
         return $this->name;
     }
 
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getAmount(): int
     {
         return $this->amount;
     }
+
+    /**
+     * @param mixed $amount
+     */
+    public function setAmount($amount): self
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    public function getVictories(): int
+    {
+        return $this->victories;
+    }
+
+    /**
+     * @param mixed $victories
+     */
+    public function setVictories($victories): self
+    {
+        $this->victories = $victories;
+        return $this;
+    }
+
+    public function getFails(): int
+    {
+        return $this->fails;
+    }
+
+    /**
+     * @param mixed $fails
+     */
+    public function setFails($fails): self
+    {
+        $this->fails = $fails;
+        return $this;
+    }
+
+    public function getCreationDate(): \DateTime
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate): self
+    {
+        $this->creationDate = $creationDate;
+        return $this;
+    }
+
+
 }
