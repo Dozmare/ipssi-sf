@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
- * 
+ *
  * @UniqueEntity(fields={"name"}, message="Le nom d'utilisateur existe déja, veuillez en choisir un autre")
  */
 class Player
