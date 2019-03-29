@@ -52,8 +52,9 @@ class PartyRepository extends ServiceEntityRepository
     public function findTopParty(int $limit)
     {
         $query = $this->createQueryBuilder('p')
-            ->select('p.game, COUNT(p.game) as number')
-            ->groupBy('p.game')
+            ->select('g.name, COUNT(p) as number')
+            ->join('p.game', 'g')
+            ->groupBy('g.name')
             ->orderBy('number','DESC')
             ->setMaxResults($limit)
         ;

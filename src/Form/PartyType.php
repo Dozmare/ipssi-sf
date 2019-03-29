@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Game;
 use App\Entity\Party;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\Tests\Compiler\G;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,16 +17,11 @@ class PartyType extends AbstractType
     {
         $builder
             ->add('date')
-            ->add('game', ChoiceType::class, [
-                'choice_label' => function ($value) {
-                    return $value;
-                },
-                'choices' => [
-                    'Colt Express',
-                    'Blanc manger coco',
-                    'Bang',
-                    'Munchkin',
-                ]
+            ->add('game', EntityType::class, [
+                'class' => Game::class,
+                'choice_label' => function(Game $game) {
+                    return $game->getName() . " ({$game->getMinPlayer()}-{$game->getMaxPlayer()}";
+                }
             ])
         ;
     }

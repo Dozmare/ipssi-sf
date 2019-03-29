@@ -22,9 +22,11 @@ class Party
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $game;
+
 
     public function getId(): ?int
     {
@@ -43,12 +45,12 @@ class Party
         return $this;
     }
 
-    public function getGame(): ?string
+    public function getGame(): ?Game
     {
         return $this->game;
     }
 
-    public function setGame(string $game): self
+    public function setGame(?Game $game): self
     {
         $this->game = $game;
 

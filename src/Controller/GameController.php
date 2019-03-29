@@ -66,7 +66,7 @@ class GameController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($game);
         $em->flush();
-        
+
         return $this->redirectToRoute('app_game_list');
     }
 
