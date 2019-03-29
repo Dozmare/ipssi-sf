@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Party;
 use App\Form\PartyType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,5 +35,21 @@ class PartyController extends AbstractController
             'partyForm' => $newPartyForm->createView(),
             'isOk' => $isOk,
         ]);
+    }
+
+    /**
+     * @param int $number
+     * @return Response
+     * @Route("/top/{number}")
+     */
+    public function topParty(int $number)
+    {
+        $entitymanager = $this->getDoctrine()->getManager();
+        $requestRepoParty = $entitymanager->getRepository(Party::class);
+        $listPartyTop = $requestRepoParty->findTopParty($number);
+
+        return $this->render("party/top.html.twig", array(
+            "topParty"  =>  $listPartyTop,
+        ));
     }
 }

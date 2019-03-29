@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Party;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Validator\Constraints\Count;
 
 /**
  * @method Party|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +48,17 @@ class PartyRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findTopParty(int $limit)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p.game, COUNT(p.game) as number')
+            ->groupBy('p.game')
+            ->orderBy('number','DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $query->getQuery()
+            ->getResult();
+    }
 }

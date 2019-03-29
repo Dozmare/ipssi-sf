@@ -1,0 +1,5 @@
+App\Entity\Party:
+    party{0..99}:
+        game: "<randomElement(['Colt Express','Blanc manger coco','Bang','Munchkin'])>"
+        date: "<dateTimeBetween('1 year ago', 'now')>"
+
